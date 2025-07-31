@@ -85,18 +85,18 @@ export function Courses() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         {courses.map((course) => {
           const Icon = course.icon;
           
           return (
             <div
               key={course.id}
-              className="group bg-gradient-to-br from-white/5 to-black/20 backdrop-blur-sm rounded-2xl p-6 border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10"
+              className="group bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10"
             >
               <div className="space-y-5">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center flex-shrink-0">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
@@ -104,7 +104,7 @@ export function Courses() {
                   </h3>
                 </div>
                 
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-300 text-base leading-relaxed">
                   {course.description}
                 </p>
                 
@@ -123,23 +123,23 @@ export function Courses() {
         })}
       </div>
 
-      <div className="text-center bg-gradient-to-r from-blue-900/20 to-blue-800/20 rounded-2xl p-8 border border-blue-800/30">
-        <h2 className="text-2xl font-bold text-white mb-4">Ready to start your learning journey?</h2>
-        <p className="text-[#CCCCCC] mb-6 max-w-2xl mx-auto">
+      <div className="text-center bg-gradient-to-r from-gray-900/80 to-gray-800/80 rounded-2xl p-8 border border-gray-700/50">
+        <h2 className="text-3xl font-bold text-white mb-4">Ready to start your learning journey?</h2>
+        <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
           Join our community of learners and take the first step towards mastering new skills. 
           Our expert mentors are here to guide you every step of the way.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <Button 
             variant="primary"
-            className="px-8 py-3 text-base"
+            className="px-8 py-4 text-base font-medium rounded-lg hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get Started Today
           </Button>
           <Button 
             variant="secondary"
-            className="px-8 py-3 text-base"
+            className="px-8 py-4 text-base font-medium rounded-lg hover:shadow-lg hover:shadow-white/10 transition-all duration-300"
             onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Hear from Our Students
