@@ -1,0 +1,51 @@
+import { Header } from './components/Header';
+import { Hero } from './components/Hero';
+import { AboutUs } from './pages/AboutUs';
+import { Story } from './pages/Story';
+import { ProjectShowcase } from './pages/ProjectShowcase';
+import { Courses } from './pages/Courses';
+import FAQs from './components/FAQs';
+import { Contact } from './pages/Contact';
+import { CustomCursor } from './components/CustomCursor';
+import { Footer } from './components/Footer';
+import Gallery from './components/Gallery';
+import Partners from './components/Partners';
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-black">
+      <CustomCursor />
+      <Header />
+      <main>
+        <div id="home">
+          <Hero />
+        </div>
+        <div id="about">
+          <AboutUs />
+        </div>
+        <div id="courses">
+          <Courses />
+        </div>
+        <div id="gallery">
+          <Gallery />
+        </div>
+        <div id="partners">
+          <Partners />
+        </div>
+        <div id="community">
+          <ProjectShowcase />
+        </div>
+        <div id="story">
+          <Story />
+        </div>
+        <div id="faqs">
+          <FAQs />
+        </div>
+        <div id="contact">
+          <Contact />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
