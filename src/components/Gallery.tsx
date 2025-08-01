@@ -1,23 +1,12 @@
 import { useState } from "react";
 import { 
-  GalleryHorizontal, 
   Maximize,
   X
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Get all images from the public/eventpics directory
-const eventImages = [
-  "/eventpics/20250322_114816.jpg",
-  "/eventpics/genai.png",
-  "/eventpics/genai2.png",
-  "/eventpics/genai3.png",
-  "/eventpics/github1.png",
-  "/eventpics/github2.png",
-  "/eventpics/hnw1.jpg",
-  "/eventpics/hnw2.jpg",
-  "/eventpics/hnw3.png",
-];
+const eventImages = Array(9).fill("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23333'/%3E%3C/svg%3E");
 
 const Gallery = () => {
   const [activeImage, setActiveImage] = useState<string | null>(null);
@@ -67,24 +56,18 @@ const Gallery = () => {
         variants={containerVariants}
         className="container mx-auto px-4 relative z-10"
       >
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <div className="relative">
-            <div className="absolute inset-0 bg-blue-500/30 blur-xl rounded-full"></div>
-            <GalleryHorizontal className="w-10 h-10 text-blue-400 relative z-10" />
-          </div>
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
+        <div className="text-center mb-6">
+          <h2 className="text-4xl font-bold mb-2 text-white">
             Event Gallery
           </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Explore moments from our memorable events
+          </p>
         </div>
-        <motion.p 
-          variants={itemVariants}
-          className="text-gray-300 text-center mb-12 text-lg max-w-2xl mx-auto"
-        >
-          Explore moments from our memorable events
-        </motion.p>
 
-        <motion.div variants={itemVariants} className="relative w-full overflow-hidden">
-          <div className="animate-marquee whitespace-nowrap">
+
+        <motion.div variants={itemVariants} className="relative w-full overflow-x-hidden py-4">
+          <div className="animate-marquee whitespace-nowrap inline-flex items-center">
             {[...eventImages, ...eventImages].map((image, index) => (
               <div 
                 key={`${image}-${index}`} 
@@ -117,8 +100,8 @@ const Gallery = () => {
               100% { transform: translateX(-50%); }
             }
             .animate-marquee {
-              display: inline-block;
-              animation: marquee 60s linear infinite;
+              display: inline-flex;
+              animation: marquee 30s linear infinite;
             }
             .animate-marquee:hover {
               animation-play-state: paused;

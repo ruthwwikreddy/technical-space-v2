@@ -3,7 +3,6 @@ import { Hero } from './components/Hero';
 import { AboutUs } from './pages/AboutUs';
 import { Story } from './pages/Story';
 import { ProjectShowcase } from './pages/ProjectShowcase';
-import { Courses } from './pages/Courses';
 import FAQs from './components/FAQs';
 import { Contact } from './pages/Contact';
 import { CustomCursor } from './components/CustomCursor';
@@ -22,9 +21,6 @@ export default function App() {
         </div>
         <div id="about">
           <AboutUs />
-        </div>
-        <div id="courses">
-          <Courses />
         </div>
         <div id="gallery">
           <Gallery />

@@ -1,5 +1,4 @@
-import React from 'react';
-import { BookOpen, Users, Calendar, Target } from 'lucide-react';
+import { BookOpen, Users, Calendar } from 'lucide-react';
 
 export function Hero() {
   const handleExploreCourses = () => {

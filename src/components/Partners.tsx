@@ -2,14 +2,14 @@ import { Card } from "./shared/Card";
 import { motion } from "framer-motion";
 
 const partners = [
-  { name: "D4Community", image: "/partners/d4community.png" },
-  { name: "Commudle", image: "/partners/commudle.png" },
-  { name: "Innovista", image: "/partners/innovista.jpg" },
-  { name: "MRCE", image: "/partners/mrce.jpg" },
-  { name: "MRCE Chapter", image: "/partners/mrcechapter.png" },
-  { name: "MRCE IIIC", image: "/partners/mrceiiic.png" },
-  { name: "Pieces for Developers", image: "/partners/piecesfordevelopers.png" },
-  { name: "Student Nexus", image: "/partners/student-nexus.png" }
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
+  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" }
 ];
 
 const Partners = () => {
@@ -23,7 +23,7 @@ const Partners = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-2 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-2 text-white">
             Our Partners
           </h2>
           <p className="text-gray-300 max-w-2xl mx-auto">
@@ -35,13 +35,13 @@ const Partners = () => {
           <div className="animate-marquee whitespace-nowrap">
             {[...partners, ...partners].map((partner, index) => (
               <div 
-                key={`${partner.name}-${index}`} 
+                key={`partner-${index}`} 
                 className="inline-block mx-4 w-40 h-24"
               >
                 <Card className="h-full flex items-center justify-center bg-black/30 border border-blue-800/30 hover:border-blue-500/50 transition-colors p-4">
                   <img
                     src={partner.image}
-                    alt={partner.name}
+                    alt="Partner logo"
                     className="max-h-16 max-w-full object-contain"
                   />
                 </Card>

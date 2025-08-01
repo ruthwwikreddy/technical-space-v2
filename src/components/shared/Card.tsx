@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { LucideIcon } from 'lucide-react';
 
 // Base card component with glass effect and hover animations
 export function Card({ 
@@ -7,14 +8,20 @@ export function Card({
   onClick, 
   role = 'div',
   tabIndex,
-  ariaLabel
+  ariaLabel,
+  icon: Icon,
+  title,
+  description
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   onClick?: () => void;
   role?: string;
   tabIndex?: number;
   ariaLabel?: string;
+  icon?: LucideIcon;
+  title?: string;
+  description?: string;
 }) {
   return (
     <div 
@@ -29,6 +36,9 @@ export function Card({
     >
       {/* Animated background glow on hover */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-800 to-blue-700 rounded-xl blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+      {Icon && <Icon className="w-8 h-8 mb-4 text-blue-400" />}
+      {title && <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>}
+      {description && <p className="text-gray-300">{description}</p>}
       {children}
     </div>
   );
