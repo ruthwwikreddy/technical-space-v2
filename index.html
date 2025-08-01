@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Technical Space</title>
     <script>
-      // Original title
       const originalTitle = "Technical Space";
 
-      // Call-back titles when the tab is hidden
       const callBackTitles = [
         "Come back, genius!",
         "Still curious?",
@@ -23,7 +21,6 @@
       let titleInterval;
       let titleIndex = 0;
 
-      // Handle visibility change (tab switching)
       function handleVisibilityChange() {
         if (document.hidden) {
           titleInterval = setInterval(() => {
@@ -37,7 +34,6 @@
 
       document.addEventListener("visibilitychange", handleVisibilityChange);
 
-      // Initialize title on load
       window.onload = () => {
         document.title = originalTitle;
       };
