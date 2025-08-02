@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 
 const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about-us' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Courses', href: '#about' },
   { label: 'Partners', href: '#partners' },
   { label: 'Our Story', href: '#story' },
+  { label: 'Community', href: '#community' },
   { label: 'FAQs', href: '#faqs' },
   { label: 'Contact', href: '#contact' },
 ];

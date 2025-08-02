@@ -1,18 +1,131 @@
 import { Card } from "./shared/Card";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { X } from 'lucide-react';
 
 const partners = [
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" },
-  { image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3C/svg%3E" }
+  { 
+    name: 'AI OpenSec',
+    image: './assets/partners/aiopensec.jpg',
+    website: 'https://aiopensec.com/'
+  },
+  { 
+    name: 'AZ Dev Reskill',
+    image: './assets/partners/azdev.reskilll.svg',
+    website: 'https://azdevreskill.com/'
+  },
+  { 
+    name: 'CK Care Shop',
+    image: './assets/partners/ckccaresshop.avif',
+    website: 'https://ckcareshop.com/'
+  },
+  { 
+    name: 'Technical Space',
+    image: './assets/partners/logo.webp',
+    website: '/'
+  },
+  { 
+    name: 'LSA Recruitment',
+    image: './assets/partners/lsa-recruitment.webp',
+    website: 'https://lsarecruitment.com/'
+  },
+  { 
+    name: 'Possobuild',
+    image: './assets/partners/possobuild.svg',
+    website: 'https://possobuild.com/'
+  },
+  { 
+    name: 'Reskill',
+    image: './assets/partners/reskill.png',
+    website: 'https://reskilll.com/'
+  }
 ];
 
+interface Partner {
+  name: string;
+  image: string;
+  website: string;
+}
+
 const Partners = () => {
+  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollContentRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const scrollSpeed = 1;
+  let animationFrameId: number;
+  let scrollPosition = 0;
+
+  const closeModal = () => setSelectedPartner(null);
+  
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        closeModal();
+      }
+    };
+
+    if (selectedPartner) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedPartner]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const scrollContent = scrollContentRef.current;
+    
+    if (!container || !scrollContent) return;
+
+    // Duplicate the partners for seamless scrolling
+    const totalWidth = scrollContent.scrollWidth / 2;
+    
+    const scroll = () => {
+      if (!container || !scrollContent) return;
+      
+      scrollPosition += scrollSpeed;
+      
+      // Reset scroll position to create infinite loop
+      if (scrollPosition >= totalWidth) {
+        scrollPosition = 0;
+      }
+      
+      container.scrollLeft = scrollPosition;
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+    
+    // Start the animation
+    animationFrameId = requestAnimationFrame(scroll);
+    
+    // Pause on hover
+    const handleMouseEnter = () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+    
+    const handleMouseLeave = () => {
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+    
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
+    
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  // Duplicate the partners array for seamless scrolling
+  const duplicatedPartners = [...partners, ...partners];
+
   return (
     <section id="partners" className="py-16 bg-black">
       <div className="container mx-auto px-4">
@@ -31,20 +144,33 @@ const Partners = () => {
           </p>
         </motion.div>
         
-        <div className="relative w-full overflow-hidden">
-          <div className="animate-marquee whitespace-nowrap">
-            {[...partners, ...partners].map((partner, index) => (
+        <div 
+          ref={containerRef}
+          className="w-full overflow-x-hidden py-4 cursor-grab active:cursor-grabbing"
+        >
+          <div 
+            ref={scrollContentRef}
+            className="flex flex-nowrap gap-8 w-max"
+          >
+            {duplicatedPartners.map((partner, index) => (
               <div 
-                key={`partner-${index}`} 
-                className="inline-block mx-4 w-40 h-24"
+                key={`partner-${index}-${partner.name}`} 
+                className="flex-shrink-0 w-40 h-24"
               >
-                <Card className="h-full flex items-center justify-center bg-black/30 border border-blue-800/30 hover:border-blue-500/50 transition-colors p-4">
-                  <img
-                    src={partner.image}
-                    alt="Partner logo"
-                    className="max-h-16 max-w-full object-contain"
-                  />
-                </Card>
+                <div 
+                  className="h-full cursor-pointer"
+                  onClick={() => setSelectedPartner(partner)}
+                >
+                  <Card className="h-full flex items-center justify-center bg-black/30 border border-blue-800/30 hover:border-blue-500/50 transition-all hover:scale-105 p-4">
+                    <img
+                      src={partner.image}
+                      alt={`${partner.name} logo`}
+                      className="max-h-16 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                      title={`Click to view ${partner.name}`}
+                      draggable={false}
+                    />
+                  </Card>
+                </div>
               </div>
             ))}
           </div>
@@ -52,18 +178,86 @@ const Partners = () => {
       </div>
       
       <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        /* Smooth scrolling for the container */
+        .smooth-scroll {
+          scroll-behavior: smooth;
         }
-        .animate-marquee {
-          display: inline-block;
-          animation: marquee 30s linear infinite;
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
         }
-        .animate-marquee:hover {
-          animation-play-state: paused;
+        
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
       `}</style>
+
+      <AnimatePresence>
+        {selectedPartner && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+            <motion.div 
+              ref={modalRef}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="bg-gray-900 rounded-xl p-6 max-w-2xl w-full relative border border-blue-900/50"
+            >
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                aria-label="Close modal"
+              >
+                <X size={24} />
+              </button>
+              
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-1 flex items-center justify-center p-4 bg-gray-800/50 rounded-lg">
+                  <img
+                    src={selectedPartner.image}
+                    alt={`${selectedPartner.name} logo`}
+                    className="max-h-48 max-w-full object-contain"
+                    draggable={false}
+                  />
+                </div>
+                
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    {selectedPartner.name}
+                  </h3>
+                  <p className="text-gray-300 mb-6">
+                    Visit our partner's website to learn more about their services and offerings.
+                  </p>
+                  <a
+                    href={selectedPartner.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Visit Website
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 ml-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -9,6 +9,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { Footer } from './components/Footer';
 import Gallery from './components/Gallery';
 import Partners from './components/Partners';
+import { SpecialServices } from './components/SpecialServices';
 
 export default function App() {
   return (
@@ -21,6 +22,9 @@ export default function App() {
         </div>
         <div id="about">
           <AboutUs />
+        </div>
+        <div id="services">
+          <SpecialServices />
         </div>
         <div id="gallery">
           <Gallery />
