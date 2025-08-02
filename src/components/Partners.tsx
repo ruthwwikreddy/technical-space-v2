@@ -31,12 +31,12 @@ const partners = [
   },
   { 
     name: 'Possobuild',
-    image: './assets/partners/possobuild.svg',
+    image: './assets/partners/possobuild_white.png',
     website: 'https://possobuild.com/'
   },
   { 
     name: 'Reskill',
-    image: './assets/partners/reskill.png',
+    image: './assets/partners/reskill_white.png',
     website: 'https://reskilll.com/'
   }
 ];
