@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from './shared/Button';
-import { useContact } from '../hooks/useContact';
+import { useForm, ValidationError } from '@formspree/react';
 import { Loader2 } from 'lucide-react';
 
 interface FormData {
@@ -10,14 +10,13 @@ interface FormData {
 }
 
 export function ContactForm() {
-  const { submitContact, loading, error } = useContact();
+  const [state, handleSubmit] = useForm('mblkaony');
+  const [focused, setFocused] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: ''
   });
-  const [focused, setFocused] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -32,28 +31,19 @@ export function ContactForm() {
     setFocused(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const success = await submitContact(formData);
-    if (success) {
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-    }
-  };
-
-  if (submitted) {
+  if (state.succeeded) {
     return (
-      <div className="bg-white/5 backdrop-blur-lg rounded-xl p-8 text-center">
-        <div className="w-16 h-16 bg-gradient-to-r from-blue-800 to-blue-700 rounded-full mx-auto flex items-center justify-center mb-6">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <div className="text-center p-8 bg-black/50 rounded-2xl border border-blue-900/50 shadow-2xl">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-900/20 rounded-full mb-4">
+          <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-white mb-4">Message Sent!</h3>
-        <p className="text-[#CCCCCC] mb-6">Thank you for reaching out. We'll get back to you as soon as possible.</p>
+        <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
+        <p className="text-blue-300">Thank you for reaching out. I'll get back to you soon!</p>
         <Button 
           variant="secondary" 
-          onClick={() => setSubmitted(false)}
+          onClick={() => setFormData({ name: '', email: '', message: '' })}
         >
           Send Another Message
         </Button>
@@ -62,7 +52,13 @@ export function ContactForm() {
   }
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit}>
+    <form onSubmit={(e) => {
+      const form = e.currentTarget;
+      handleSubmit(e);
+      if (state.succeeded) {
+        form.reset();
+      }
+    }} className="space-y-6">
       <div className="relative">
         <label 
           htmlFor="name" 
@@ -82,6 +78,12 @@ export function ContactForm() {
           onFocus={() => handleFocus('name')}
           onBlur={handleBlur}
         />
+        <ValidationError 
+          prefix="Name" 
+          field="name"
+          errors={state.errors}
+          className="text-red-500 text-sm mt-1"
+        />
         <div className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-800 to-blue-700 transition-all duration-300 ${focused === 'name' ? 'w-full' : 'w-0'}`}></div>
       </div>
       
@@ -97,12 +99,18 @@ export function ContactForm() {
           id="email" 
           name="email"
           className="form-input" 
-          placeholder="john@example.com"
+          placeholder="you@example.com"
           required
           value={formData.email}
           onChange={handleChange}
           onFocus={() => handleFocus('email')}
           onBlur={handleBlur}
+        />
+        <ValidationError 
+          prefix="Email" 
+          field="email"
+          errors={state.errors}
+          className="text-red-500 text-sm mt-1"
         />
         <div className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-800 to-blue-700 transition-all duration-300 ${focused === 'email' ? 'w-full' : 'w-0'}`}></div>
       </div>
@@ -126,33 +134,36 @@ export function ContactForm() {
           onFocus={() => handleFocus('message')}
           onBlur={handleBlur}
         ></textarea>
+        <ValidationError 
+          prefix="Message" 
+          field="message"
+          errors={state.errors}
+          className="text-red-500 text-sm mt-1"
+        />
         <div className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-800 to-blue-700 transition-all duration-300 ${focused === 'message' ? 'w-full' : 'w-0'}`}></div>
       </div>
       
-      {error && (
+      {state.errors && (
         <div className="bg-blue-900/20 border border-blue-800/30 rounded-lg p-3 flex items-start">
           <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p className="text-blue-500 text-sm">{error}</p>
+          <p className="text-blue-500 text-sm">There was an error submitting the form. Please try again.</p>
         </div>
       )}
       
-      <Button 
-        variant="primary"
-        disabled={loading}
-        className="w-full"
+      <button 
         type="submit"
+        disabled={state.submitting}
+        className="relative px-8 py-3 rounded-full font-medium transition-all duration-500 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed btn-hover holographic bg-gradient-to-r from-blue-700 to-blue-800 text-white w-full flex items-center justify-center"
       >
-        {loading ? (
-          <span className="flex items-center justify-center">
+        {state.submitting ? (
+          <>
             <Loader2 className="w-5 h-5 mr-2 animate-spin" />
             Sending...
-          </span>
-        ) : (
-          'Send Message'
-        )}
-      </Button>
+          </>
+        ) : 'Send Message'}
+      </button>
       
       <p className="text-[#CCCCCC] text-sm text-center">
         By submitting this form, you agree to our <a href="#" className="text-blue-500 hover:underline">Privacy Policy</a>

@@ -122,8 +122,8 @@ export function Contact() {
               </div>
               <Button
                 variant="primary"
+                type="submit"
                 className="w-full"
-                onClick={handleSubmit}
                 disabled={loading}
               >
                 {loading ? 'Sending...' : 'Send Message'}

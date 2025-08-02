@@ -4,7 +4,8 @@ type ButtonProps = {
   variant?: 'primary' | 'secondary';
   children: React.ReactNode;
   className?: string;
-  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   href?: string;
   'aria-label'?: string;
@@ -14,6 +15,7 @@ export function Button({
   variant = 'primary', 
   children, 
   className = '', 
+  type = 'button',
   onClick, 
   disabled, 
   href,
@@ -48,21 +50,22 @@ export function Button({
     `
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (href) {
       e.preventDefault();
       const element = document.getElementById(href.replace('#', ''));
       element?.scrollIntoView({ behavior: 'smooth' });
     }
-    onClick?.();
+    onClick?.(e);
   };
 
   return (
     <button 
+      type={type}
       className={`${baseStyles} ${variants[variant]} ${className}`}
       onClick={handleClick}
       disabled={disabled}
-      aria-label={ariaLabel || typeof children === 'string' ? children : undefined}
+      aria-label={ariaLabel || (typeof children === 'string' ? children : '')}
       role="button"
     >
       <span className="relative z-10 flex items-center justify-center gap-2">
