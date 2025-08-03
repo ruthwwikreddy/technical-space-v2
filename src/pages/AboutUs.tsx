@@ -1,61 +1,41 @@
 import { PageContainer } from '../components/shared/PageContainer';
 import { Button } from '../components/shared/Button';
-import { BookOpen, Database, Cloud, Code, Users, BarChart3, CheckCircle, Server, Settings, ClipboardList } from 'lucide-react';
+import { Target, Award, Users2, BookOpen, GraduationCap, Globe2 } from 'lucide-react';
 
-const courses = [
+const aboutItems = [
   {
-    icon: Code,
-    title: 'Software Engineer',
-    description: 'Master programming and build scalable applications with modern frameworks.'
+    icon: Users2,
+    title: 'Our Mission',
+    description: 'Empowering individuals with cutting-edge technical education to build the next generation of tech leaders.'
   },
   {
-    icon: Database,
-    title: 'Data Engineer',
-    description: 'Build ETL pipelines and manage big data with Hadoop, Spark, and cloud tools.'
+    icon: Target,
+    title: 'Our Vision',
+    description: 'To be the premier destination for technical education, fostering innovation and excellence in the tech industry.'
   },
   {
-    icon: Cloud,
-    title: 'DevOps Engineer',
-    description: 'Automate deployments with Docker, Kubernetes, and CI/CD pipelines.'
-  },
-  {
-    icon: CheckCircle,
-    title: 'Test Engineer (Manual and Automation)',
-    description: 'Learn manual and automated testing techniques using Selenium, JMeter, and other tools.'
-  },
-  {
-    icon: Server,
-    title: 'Cloud Architect (AWS/Azure/GCP)',
-    description: 'Design and deploy cloud solutions on AWS, Azure, and GCP.'
-  },
-  {
-    icon: BarChart3,
-    title: 'Business Analyst (IT)',
-    description: 'Analyze data and model business processes with JIRA and SQL.'
-  },
-  {
-    icon: ClipboardList,
-    title: 'IT Project Manager',
-    description: 'Lead projects using agile methodologies.'
-  },
-  {
-    icon: Settings,
-    title: 'Oracle Modules',
-    description: 'Learn Oracle applications and database management.'
-  },
-  {
-    icon: Users,
-    title: 'SAP Modules',
-    description: 'Master SAP ERP for finance, HR, and logistics.'
+    icon: Award,
+    title: 'Our Values',
+    description: 'Excellence, Innovation, Integrity, and Community drive everything we do.'
   },
   {
     icon: BookOpen,
-    title: 'Salesforce Modules',
-    description: 'Become a Salesforce CRM expert.'
+    title: 'Expert Faculty',
+    description: 'Learn from industry professionals with years of hands-on experience.'
+  },
+  {
+    icon: GraduationCap,
+    title: 'Hands-on Learning',
+    description: 'Practical, project-based curriculum designed for real-world application.'
+  },
+  {
+    icon: Globe2,
+    title: 'Global Community',
+    description: 'Join a diverse network of tech professionals and learners worldwide.'
   }
 ];
 
-const courseList = courses.map(({ icon: Icon, title, description }, index) => (
+const aboutList = aboutItems.map(({ icon: Icon, title, description }, index) => (
   <div 
     key={title}
     className="group relative bg-black/40 backdrop-blur-lg rounded-xl p-8 hover:transform hover:-translate-y-2 transition-all duration-500 border border-white/10 overflow-hidden cursor-pointer"
@@ -82,23 +62,22 @@ export function AboutUs() {
   return (
     <PageContainer>
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Courses</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">About Us</h1>
         <p className="text-[#CCCCCC] max-w-2xl mx-auto">
-          Accelerate your tech career with our expert-led courses.
+          We are a team of passionate technologists and educators committed to delivering high-quality technical education.
         </p>
       </div>
 
-      {/* Course Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {courseList}
+        {aboutList}
       </div>
 
       <div className="text-center">
         <Button 
           variant="primary"
-          onClick={() => document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          Join Our Community
+          Get in Touch
         </Button>
       </div>
     </PageContainer>

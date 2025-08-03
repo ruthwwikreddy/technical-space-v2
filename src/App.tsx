@@ -1,5 +1,6 @@
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { Courses } from './pages/Courses';
 import { AboutUs } from './pages/AboutUs';
 import { Story } from './pages/Story';
 import { ProjectShowcase } from './pages/ProjectShowcase';
@@ -22,6 +23,9 @@ export default function App() {
         </div>
         <div id="about">
           <AboutUs />
+        </div>
+        <div id="courses">
+          <Courses />
         </div>
         <div id="services">
           <SpecialServices />

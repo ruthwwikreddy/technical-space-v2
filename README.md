@@ -106,7 +106,7 @@ npm run deploy
 ## 📄 Pages
 
 - **Home**: Engaging hero section with call-to-action
-- **About Us**: Organization information
+- **Courses**: Explore our course offerings
 - **Portfolio**: Showcase of projects
 - **Events**: Upcoming and past events
 - **Contact**: Get in touch form
