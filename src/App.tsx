@@ -40,13 +40,12 @@ export default function App() {
         <div id="community">
           <ProjectShowcase />
         </div>
-        <div id="contact">
-          <Contact />
-        </div>
         <div id="faqs">
           <FAQs />
         </div>
-
+        <div id="contact">
+          <Contact />
+        </div>
       </main>
       <Footer />
     </div>

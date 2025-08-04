@@ -108,17 +108,6 @@ const faqsData: FAQ[] = [
               </div>
             ))}
           </div>
-          
-          {/* CTA */}
-          <div className="mt-12 text-center">
-            <p className="text-blue-100/70 mb-6">Still have questions? We're here to help!</p>
-            <a 
-              href="#contact" 
-              className="inline-block px-6 py-3 bg-[#003366] text-white rounded-lg font-medium hover:bg-[#003366]/80 transition-all duration-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]"
-            >
-              Contact Us
-            </a>
-          </div>
         </div>
       </section>
     );
