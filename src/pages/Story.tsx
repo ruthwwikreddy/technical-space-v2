@@ -8,7 +8,7 @@ export function Story() {
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Story</h1>
         <p className="text-[#CCCCCC] text-lg max-w-3xl mx-auto">
-          Technical Space began as a grassroots effort to bring real tech skills to ambitious students. From student bootcamps to live workshops, we've grown into a thriving learning platform with 5,000+ learners.
+          Technical Space started as a student initiative, growing from bootcamps to a leading learning platform with 5,000+ students mastering tech skills.
         </p>
       </div>
 
