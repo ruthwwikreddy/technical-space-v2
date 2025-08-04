@@ -12,75 +12,8 @@
   --cursor-size: 20px;
 }
 
-/* Enhanced Custom Cursor */
-@media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-
-  .custom-cursor {
-    width: var(--cursor-size);
-    height: var(--cursor-size);
-    background: transparent;
-    border: 2px solid var(--primary);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
-    transform: translate(-50%, -50%);
-    mix-blend-mode: difference;
-    will-change: transform;
-    box-shadow: 0 0 20px var(--primary);
-    animation: cursorPulse 2s infinite;
-  }
-
-  .custom-cursor::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--primary);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 12px var(--primary);
-    transition: all 0.15s ease;
-  }
-
-  .custom-cursor.hover {
-    transform: translate(-50%, -50%) scale(1.5);
-    background: rgba(0, 51, 102, 0.1);
-    border-color: var(--primary-light);
-    backdrop-filter: blur(4px);
-    animation: cursorHoverPulse 1s infinite;
-  }
-
-  .custom-cursor.clicking {
-    transform: translate(-50%, -50%) scale(0.8);
-    background: rgba(0, 51, 102, 0.2);
-    animation: cursorClickPulse 0.5s;
-  }
-}
-
-@keyframes cursorPulse {
-  0% { box-shadow: 0 0 20px var(--primary); }
-  50% { box-shadow: 0 0 30px var(--primary); }
-  100% { box-shadow: 0 0 20px var(--primary); }
-}
-
-@keyframes cursorHoverPulse {
-  0% { box-shadow: 0 0 25px var(--primary); transform: translate(-50%, -50%) scale(1.5); }
-  50% { box-shadow: 0 0 35px var(--primary); transform: translate(-50%, -50%) scale(1.6); }
-  100% { box-shadow: 0 0 25px var(--primary); transform: translate(-50%, -50%) scale(1.5); }
-}
-
-@keyframes cursorClickPulse {
-  0% { transform: translate(-50%, -50%) scale(0.8); box-shadow: 0 0 20px var(--primary); }
-  50% { transform: translate(-50%, -50%) scale(0.7); box-shadow: 0 0 40px var(--primary); }
-  100% { transform: translate(-50%, -50%) scale(0.8); box-shadow: 0 0 20px var(--primary); }
-}
+/* Custom cursor styles have been removed */
+/* Custom cursor styles have been removed */
 
 body {
   font-family: 'Inter', sans-serif;

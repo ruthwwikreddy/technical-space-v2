@@ -1,9 +1,149 @@
+import { useState, useRef } from 'react';
 import { PageContainer } from '../components/shared/PageContainer';
-import { Users, Calendar, MessageCircle, Trophy, MessageSquare } from 'lucide-react';
+import { Users, Calendar, MessageSquare, MessageCircle, Trophy } from 'lucide-react';
 import { Button } from '../components/shared/Button';
-import { registerLink } from '../config/navigation';
+import { useForm, ValidationError } from '@formspree/react';
+
+// Event Registration Form Component
+function EventRegistrationForm({ selectedEvent = '' }: { selectedEvent?: string }) {
+  const [state, handleSubmit] = useForm("xrgwqyqy");
+  
+  if (state.succeeded) {
+    return (
+      <div className="bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10">
+        <h2 className="text-2xl font-bold text-white mb-6">Thank You for Registering!</h2>
+        <p className="text-gray-300">
+          We've received your registration. We'll be in touch with more details about the upcoming events.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white/5 backdrop-blur-lg rounded-xl p-8 border border-white/10">
+      <h2 className="text-2xl font-bold text-white mb-6">Ready to Elevate Your Career? Register Today!</h2>
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+            Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            placeholder="Your full name"
+          />
+          <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-sm mt-1" />
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+              Phone Number <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              placeholder="Your phone number"
+            />
+            <ValidationError prefix="Phone" field="phone" errors={state.errors} className="text-red-400 text-sm mt-1" />
+          </div>
+          
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              placeholder="your.email@example.com"
+            />
+            <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-sm mt-1" />
+          </div>
+        </div>
+        
+        <div>
+          <label htmlFor="qualification" className="block text-sm font-medium text-gray-300 mb-1">
+            Professional Qualification <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="qualification"
+            name="qualification"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            placeholder="Your current qualification"
+          />
+          <ValidationError prefix="Qualification" field="qualification" errors={state.errors} className="text-red-400 text-sm mt-1" />
+        </div>
+        
+        <div>
+          <label htmlFor="experience" className="block text-sm font-medium text-gray-300 mb-1">
+            Experience (Years) <span className="text-red-500">*</span>
+          </label>
+          <select
+            id="experience"
+            name="experience"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none"
+          >
+            <option value="">Select your experience level</option>
+            <option value="0-1">0-1 years</option>
+            <option value="1-3">1-3 years</option>
+            <option value="3-5">3-5 years</option>
+            <option value="5+">5+ years</option>
+          </select>
+          <ValidationError prefix="Experience" field="experience" errors={state.errors} className="text-red-400 text-sm mt-1" />
+        </div>
+        
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+            Message <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows={4}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            placeholder={selectedEvent || 'Tell us about your interest in this event...'}
+            defaultValue={selectedEvent ? `I'm interested in: ${selectedEvent}\n\n` : ''}
+          />
+          <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-sm mt-1" />
+        </div>
+        
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={state.submitting}
+            className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {state.submitting ? 'Submitting...' : 'Register Now'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
 
 export function ProjectShowcase() {
+  const [selectedEvent, setSelectedEvent] = useState('');
+  const registrationFormRef = useRef<HTMLDivElement>(null);
+  
+  const handleRegisterClick = (eventTitle: string) => {
+    setSelectedEvent(eventTitle);
+    registrationFormRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
   const upcomingEvents = [
     {
       id: 1,
@@ -125,11 +265,13 @@ export function ProjectShowcase() {
                 <span className="text-blue-500">{event.time}</span>
               </div>
               
-              <a href={registerLink} className="w-full block">
-                <Button variant="secondary" className="w-full mt-4">
-                  Register Now
-                </Button>
-              </a>
+              <Button 
+                variant="secondary" 
+                className="w-full mt-4"
+                onClick={() => handleRegisterClick(event.title)}
+              >
+                Register Now
+              </Button>
             </div>
           ))}
         </div>
@@ -149,6 +291,16 @@ export function ProjectShowcase() {
           <Button variant="secondary" onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}>
             Explore Courses
           </Button>
+        </div>
+      </div>
+      
+      {/* Registration Form Section */}
+      <div ref={registrationFormRef} className="mt-20">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-white mb-12">
+            Register for Upcoming Events
+          </h2>
+          <EventRegistrationForm selectedEvent={selectedEvent} />
         </div>
       </div>
     </PageContainer>

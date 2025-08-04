@@ -6,7 +6,6 @@ import { Story } from './pages/Story';
 import { ProjectShowcase } from './pages/ProjectShowcase';
 import FAQs from './components/FAQs';
 import { Contact } from './pages/Contact';
-import { CustomCursor } from './components/CustomCursor';
 import { Footer } from './components/Footer';
 import Gallery from './components/Gallery';
 import Partners from './components/Partners';
@@ -15,7 +14,6 @@ import { SpecialServices } from './components/SpecialServices';
 export default function App() {
   return (
     <div className="min-h-screen bg-black">
-      <CustomCursor />
       <Header />
       <main>
         <div id="home">
@@ -23,6 +21,9 @@ export default function App() {
         </div>
         <div id="about">
           <AboutUs />
+        </div>
+        <div id="story">
+          <Story />
         </div>
         <div id="courses">
           <Courses />
@@ -39,15 +40,13 @@ export default function App() {
         <div id="community">
           <ProjectShowcase />
         </div>
-        <div id="story">
-          <Story />
+        <div id="contact">
+          <Contact />
         </div>
         <div id="faqs">
           <FAQs />
         </div>
-        <div id="contact">
-          <Contact />
-        </div>
+
       </main>
       <Footer />
     </div>
