@@ -1,5 +1,4 @@
 import { PageContainer } from '../components/shared/PageContainer';
-import { Button } from '../components/shared/Button';
 import { BookOpen, Database, Cloud, Code, Users, BarChart3, CheckCircle, Server, Settings, ClipboardList } from 'lucide-react';
 
 const courses = [
@@ -79,8 +78,13 @@ const courseList = courses.map(({ icon: Icon, title, description }, index) => (
 ));
 
 export function Courses() {
+  console.log('Courses component is rendering');
+  
   return (
     <PageContainer>
+      <div className="bg-red-500">
+        {/* Temporary debug background */}
+      </div>
       <div className="text-center mb-12">
         <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Courses</h1>
         <p className="text-[#CCCCCC] max-w-2xl mx-auto">
@@ -93,14 +97,6 @@ export function Courses() {
         {courseList}
       </div>
 
-      <div className="text-center">
-        <Button 
-          variant="primary"
-          onClick={() => document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          Join Our Community
-        </Button>
-      </div>
     </PageContainer>
   );
 }

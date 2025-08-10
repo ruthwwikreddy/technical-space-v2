@@ -4,7 +4,7 @@ export const navItems = [
   { label: 'Our Story', href: '#story' },
   { label: 'Courses', href: '#courses' },
   { label: 'Partners', href: '#partners' },
-  { label: 'Community', href: '#community' },
+  { label: 'Community', href: '/community' },
   { label: 'Contact', href: '#contact' }
 ] as const;
 

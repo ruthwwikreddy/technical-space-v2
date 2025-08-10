@@ -3,7 +3,8 @@ import { Hero } from './components/Hero';
 import { Courses } from './pages/Courses';
 import { AboutUs } from './pages/AboutUs';
 import { Story } from './pages/Story';
-import { ProjectShowcase } from './pages/ProjectShowcase';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Community from './pages/Community';
 import FAQs from './components/FAQs';
 import { Contact } from './pages/Contact';
 import { Footer } from './components/Footer';
@@ -11,7 +12,7 @@ import Gallery from './components/Gallery';
 import Partners from './components/Partners';
 import { SpecialServices } from './components/SpecialServices';
 
-export default function App() {
+function MainContent() {
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -37,9 +38,6 @@ export default function App() {
         <div id="partners">
           <Partners />
         </div>
-        <div id="community">
-          <ProjectShowcase />
-        </div>
         <div id="faqs">
           <FAQs />
         </div>
@@ -49,5 +47,16 @@ export default function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainContent />} />
+        <Route path="/community" element={<Community />} />
+      </Routes>
+    </Router>
   );
 }

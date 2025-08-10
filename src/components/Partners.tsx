@@ -12,7 +12,12 @@ const partners = [
   { 
     name: 'AZ Dev Reskill',
     image: './assets/partners/azdev.reskilll.svg',
-    website: 'https://azdevreskill.com/'
+    website: 'https://azdev.reskilll.com/'
+  },
+  { 
+    name: 'Appy Systems',
+    image: './assets/partners/logo.webp',
+    website: 'https://appysystems.com/'
   },
   { 
     name: 'CK Care Shop',
@@ -20,24 +25,29 @@ const partners = [
     website: 'https://ckcareshop.com/'
   },
   { 
-    name: 'Technical Space',
-    image: './assets/partners/logo.webp',
-    website: '/'
-  },
-  { 
     name: 'LSA Recruitment',
     image: './assets/partners/lsa-recruitment.webp',
-    website: 'https://lsarecruitment.com/'
+    website: 'https://lsarecruit.co.uk/'
   },
   { 
     name: 'Possobuild',
     image: './assets/partners/possobuild_white.png',
-    website: 'https://possobuild.com/'
+    website: 'https://possobuild.ai/'
   },
   { 
     name: 'Reskill',
     image: './assets/partners/reskill_white.png',
     website: 'https://reskilll.com/'
+  },
+  { 
+    name: 'The Youth Talks',
+    image: './assets/partners/youth-talks.png',
+    website: 'https://theyouthtalks.com/'
+  },
+  { 
+    name: 'Technical Space',
+    image: './assets/partners/logo.webp',
+    website: '/'
   }
 ];
 
@@ -165,7 +175,7 @@ const Partners = () => {
                     <img
                       src={partner.image}
                       alt={`${partner.name} logo`}
-                      className="max-h-16 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                      className="max-h-16 max-w-full object-contain transition-all duration-300"
                       title={`Click to view ${partner.name}`}
                       draggable={false}
                     />

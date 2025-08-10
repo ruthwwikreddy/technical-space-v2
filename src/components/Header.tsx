@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { NavigationItem } from './NavigationItem';
 import { Logo } from './Logo';
 import { navItems } from '../config/navigation';
 
-export function Header() {
+interface HeaderProps {
+  isCommunityPage?: boolean;
+}
+
+export function Header({ isCommunityPage = false }: HeaderProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
@@ -30,8 +37,23 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogoClick = () => {
+    if (isCommunityPage) {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleJoinCommunity = () => {
-    document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' });
+    if (isCommunityPage) {
+      const communityContent = document.getElementById('community-content');
+      if (communityContent) {
+        communityContent.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate('/community');
+    }
   };
 
   return (
@@ -43,18 +65,51 @@ export function Header() {
       }`}
     >
       <nav className="px-6 py-3 flex items-center justify-between" role="navigation" aria-label="Main navigation">
-        <Logo />
+        <div onClick={handleLogoClick} className="cursor-pointer">
+          <Logo />
+        </div>
         
         <div className="hidden md:flex items-center space-x-1">
-          {navItems.map((item) => (
-            <NavigationItem
-              key={item.label}
-              href={item.href}
-              isActive={activeSection === item.href.substring(1)}
-            >
-              {item.label}
-            </NavigationItem>
-          ))}
+          {navItems.map((item) => {
+            const isHashLink = item.href.startsWith('#');
+            
+            if (item.href === '/community' || item.href === '#home') {
+              return (
+                <button
+                  key={item.label}
+                  onClick={() => {
+                    if (item.href === '#home' && isCommunityPage) {
+                      navigate('/');
+                    } else if (item.href === '/community' && !isCommunityPage) {
+                      navigate('/community');
+                    } else {
+                      const target = document.getElementById(item.href.substring(1));
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                  }}
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    location.pathname === '/community' 
+                      ? 'text-white bg-blue-900/30' 
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            }
+            
+            return (
+              <NavigationItem
+                key={item.label}
+                href={item.href}
+                isActive={isHashLink ? activeSection === item.href.substring(1) : false}
+              >
+                {item.label}
+              </NavigationItem>
+            );
+          })}
         </div>
     
         <button 
