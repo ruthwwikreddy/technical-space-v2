@@ -5,10 +5,12 @@ export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current directory.
   const env = loadEnv(mode, process.cwd(), '');
   
+  const isProduction = process.env.NODE_ENV === 'production';
+  
   return {
     plugins: [react()],
     // Set base URL for GitHub Pages
-    base: process.env.NODE_ENV === 'production' ? '/technical-space/' : '/',
+    base: isProduction ? '/technical-space/' : '/',
     define: {
       // Make environment variables available to the app
       'process.env': env,

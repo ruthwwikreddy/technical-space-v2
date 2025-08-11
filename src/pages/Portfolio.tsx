@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PageContainer } from '../components/shared/PageContainer';
 import { CaseStudyCard } from '../components/portfolio/CaseStudyCard';
 import { CaseStudyModal } from '../components/portfolio/CaseStudyModal';
