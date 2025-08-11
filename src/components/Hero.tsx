@@ -1,10 +1,6 @@
 import { BookOpen, Users, Calendar } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
 
 export function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
   const handleExploreCourses = () => {
     document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -13,136 +9,31 @@ export function Hero() {
     document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    console.error('Video failed to load:', e);
-    const video = e.currentTarget;
-    console.log('Video src:', video.src);
-    console.log('Base URL:', import.meta.env.BASE_URL);
-  };
-
-  const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    console.log('Video loaded successfully:', e.currentTarget.src);
-  };
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Try multiple video source patterns
-    const baseUrl = import.meta.env.BASE_URL || '/';
-    const videoSources = [
-      baseUrl.endsWith('/') ? `${baseUrl}videos/tech-background.mp4` : `${baseUrl}/videos/tech-background.mp4`,
-      './videos/tech-background.mp4',
-      '/videos/tech-background.mp4'
-    ];
-    
-    console.log('Base URL:', baseUrl);
-    console.log('Trying video sources:', videoSources);
-    
-    let currentSourceIndex = 0;
-    
-    const tryNextSource = () => {
-      if (currentSourceIndex >= videoSources.length) {
-        console.error('All video sources failed');
-        setVideoError(true);
-        return;
-      }
-      
-      const currentSrc = videoSources[currentSourceIndex];
-      console.log(`Trying video source ${currentSourceIndex + 1}:`, currentSrc);
-      video.src = currentSrc;
-      video.load();
-      currentSourceIndex++;
-    };
-    
-    // Start with the first source
-    tryNextSource();
-    
-    // Add event listeners
-    const handleCanPlay = () => {
-      console.log('Video can play, attempting autoplay');
-      video.play().catch(error => {
-        console.log('Autoplay failed:', error);
-        setVideoError(true);
-      });
-    };
-
-    const handleLoadedData = () => {
-      console.log('Video loaded successfully');
-      setVideoLoaded(true);
-    };
-
-    const handleError = () => {
-      console.error('Video failed to load from:', video.src);
-      // Try next source if available
-      tryNextSource();
-    };
-    
-    video.addEventListener('canplay', handleCanPlay);
-    video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('error', handleError);
-
-    return () => {
-      // Cleanup
-      if (video) {
-        video.removeEventListener('canplay', handleCanPlay);
-        video.removeEventListener('loadeddata', handleLoadedData);
-        video.removeEventListener('error', handleError);
-      }
-    };
-  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
-      {/* Fallback animated background */}
-      {(videoError || !videoLoaded) && (
-        <div className="absolute inset-0 w-full h-full z-0 opacity-20">
-          <div className="w-full h-full bg-gradient-to-br from-blue-900/30 via-black to-blue-800/30 animate-pulse" />
+      {/* Animated Tech Background */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <div className="w-full h-full bg-gradient-to-br from-blue-900/20 via-black via-purple-900/10 to-blue-800/20">
+          {/* Animated dots pattern */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0s'}} />
+            <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}} />
+            <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" style={{animationDelay: '2s'}} />
+            <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.5s'}} />
+            <div className="absolute top-2/3 left-1/2 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1.5s'}} />
+            <div className="absolute top-1/2 right-1/5 w-1.5 h-1.5 bg-blue-700 rounded-full animate-pulse" style={{animationDelay: '2.5s'}} />
+          </div>
+          
+          {/* Subtle moving gradient overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-blue-500/10 to-transparent transform -skew-x-12 animate-pulse" />
+          </div>
         </div>
-      )}
-      
-      {/* Debug info - remove in production */}
-      {import.meta.env.DEV && (
-        <div className="absolute top-20 right-4 z-50 bg-black/80 text-white p-4 rounded text-xs">
-          <div>Base URL: {import.meta.env.BASE_URL}</div>
-          <div>Video Loaded: {videoLoaded ? 'Yes' : 'No'}</div>
-          <div>Video Error: {videoError ? 'Yes' : 'No'}</div>
-        </div>
-      )}
-      
-      {/* Video Background */}
-      <div className={`absolute inset-0 w-full h-full z-0 opacity-30 ${videoError ? 'hidden' : ''}`}>
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          onCanPlay={(e) => {
-            // Ensure video plays when it can
-            e.currentTarget.play().catch(error => {
-              console.log('Video autoplay failed:', error);
-            });
-          }}
-          onEnded={(e) => {
-            // Force restart the video to ensure continuous playback
-            e.currentTarget.currentTime = 0;
-            e.currentTarget.play().catch(error => {
-              console.log('Video play failed:', error);
-            });
-          }}
-          onError={handleVideoError}
-          onLoadedData={handleVideoLoad}
-          className="w-full h-full object-cover"
-        >
-          <source src={`${import.meta.env.BASE_URL}videos/tech-background.mp4`} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
       </div>
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50 z-0" />
+      <div className="absolute inset-0 bg-black/40 z-0" />
 
       <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32 z-10">
         <div className="text-center space-y-8 animate-fadeIn">

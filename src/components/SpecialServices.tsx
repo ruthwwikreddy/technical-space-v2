@@ -1,37 +1,48 @@
 import { motion } from 'framer-motion';
 import { PageContainer } from './shared/PageContainer';
 import { Button } from './shared/Button';
-import { Briefcase, FileText, User, MessageSquare, Target } from 'lucide-react';
+import { Palette, Users, BarChart3, Wifi, Code, Smartphone } from 'lucide-react';
 
 const services = [
   {
-    icon: Briefcase,
-    title: 'Visa Sponsored Jobs',
-    description: 'Expert guidance for securing visa-sponsored opportunities in IT & non-IT sectors globally.'
+    number: '01',
+    icon: Palette,
+    title: 'Web Designing',
+    description: 'Designing Digital Experiences That Work, Wow, and Win.'
   },
   {
-    icon: User,
-    title: 'LinkedIn Optimization',
-    description: 'Enhance visibility with profile optimization and personal branding strategies.'
+    number: '02',
+    icon: Users,
+    title: 'IT Staffing',
+    description: 'Staff Smarter. Scale Faster.'
   },
   {
-    icon: FileText,
-    title: 'Resume Tailoring',
-    description: 'ATS-friendly resumes that highlight your unique skills and achievements.'
+    number: '03',
+    icon: BarChart3,
+    title: 'Data Analytics & Information Management',
+    description: 'Turning Big Data Into Big Decisions.'
   },
   {
-    icon: MessageSquare,
-    title: 'Mock Interviews',
-    description: 'Practice with industry experts to boost confidence and interview performance.'
+    number: '04',
+    icon: Wifi,
+    title: 'Internet of things',
+    description: 'Connecting Devices. Creating Value.'
   },
   {
-    icon: Target,
-    title: 'Personalized Coaching',
-    description: 'One-on-one interview preparation tailored to your career goals.'
+    number: '05',
+    icon: Code,
+    title: 'Application Development',
+    description: 'From Code to Cloud, We\'ve Got You Covered.'
+  },
+  {
+    number: '06',
+    icon: Smartphone,
+    title: 'Mobile App Development',
+    description: 'Get Your Brand on Mobile Today with Our App Development Services.'
   }
 ];
 
-const serviceList = services.map(({ icon: Icon, title, description }, index) => (
+const serviceList = services.map(({ number, icon: Icon, title, description }, index) => (
   <div 
     key={title}
     className="group relative bg-black/40 backdrop-blur-lg rounded-xl p-8 hover:transform hover:-translate-y-2 transition-all duration-500 border border-white/10 overflow-hidden cursor-pointer"
@@ -43,6 +54,11 @@ const serviceList = services.map(({ icon: Icon, title, description }, index) => 
     <div className="absolute inset-0 bg-gradient-to-r from-blue-800/20 to-blue-700/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     
     <div className="relative">
+      {/* Service Number */}
+      <div className="text-blue-800 font-bold text-4xl mb-4 opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+        {number}
+      </div>
+      
       <div className="w-16 h-16 mb-6 rounded-xl bg-gradient-to-r from-blue-800 to-blue-700 p-[1px] group-hover:scale-110 transition-transform duration-500">
         <div className="w-full h-full rounded-xl bg-black flex items-center justify-center">
           <Icon className="w-8 h-8 text-white transform group-hover:scale-110 transition-transform duration-500" />
@@ -58,9 +74,9 @@ export const SpecialServices = () => {
   return (
     <PageContainer>
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Special Services</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Services</h1>
         <p className="text-[#CCCCCC] max-w-2xl mx-auto">
-          Tailored solutions to accelerate your career growth and job search success.
+          Comprehensive technology solutions to drive your business forward.
         </p>
       </div>
 
