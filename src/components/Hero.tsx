@@ -1,7 +1,8 @@
 import { BookOpen, Users, Calendar } from 'lucide-react';
-import { getAssetPath } from '../utils/assets';
+import { useEffect, useRef } from 'react';
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const handleExploreCourses = () => {
     document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -10,11 +11,56 @@ export function Hero() {
     document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    console.error('Video failed to load:', e);
+    const video = e.currentTarget;
+    console.log('Video src:', video.src);
+    console.log('Base URL:', import.meta.env.BASE_URL);
+  };
+
+  const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    console.log('Video loaded successfully:', e.currentTarget.src);
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Set the video source after component mounts
+    const baseUrl = import.meta.env.BASE_URL;
+    const videoSrc = `${baseUrl}videos/tech-background.mp4`;
+    console.log('Setting video source:', videoSrc);
+    
+    // Create source element
+    const source = document.createElement('source');
+    source.src = videoSrc;
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    
+    // Load the video
+    video.load();
+    
+    // Try to play when ready
+    video.addEventListener('canplay', () => {
+      video.play().catch(error => {
+        console.log('Autoplay failed:', error);
+      });
+    });
+
+    return () => {
+      // Cleanup
+      if (video) {
+        video.innerHTML = '';
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full z-0 opacity-30">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
@@ -33,9 +79,11 @@ export function Hero() {
               console.log('Video play failed:', error);
             });
           }}
+          onError={handleVideoError}
+          onLoadedData={handleVideoLoad}
           className="w-full h-full object-cover"
         >
-          <source src={getAssetPath('videos/tech-background.mp4')} type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}videos/tech-background.mp4`} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
