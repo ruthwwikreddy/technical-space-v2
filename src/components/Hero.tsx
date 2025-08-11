@@ -28,20 +28,35 @@ export function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
-    // Set the video source after component mounts
+    // Try multiple video source patterns
     const baseUrl = import.meta.env.BASE_URL || '/';
-    const videoSrc = baseUrl.endsWith('/') ? 
-      `${baseUrl}videos/tech-background.mp4` : 
-      `${baseUrl}/videos/tech-background.mp4`;
+    const videoSources = [
+      baseUrl.endsWith('/') ? `${baseUrl}videos/tech-background.mp4` : `${baseUrl}/videos/tech-background.mp4`,
+      './videos/tech-background.mp4',
+      '/videos/tech-background.mp4'
+    ];
     
     console.log('Base URL:', baseUrl);
-    console.log('Final video source:', videoSrc);
+    console.log('Trying video sources:', videoSources);
     
-    // Set the video src directly
-    video.src = videoSrc;
+    let currentSourceIndex = 0;
     
-    // Load the video
-    video.load();
+    const tryNextSource = () => {
+      if (currentSourceIndex >= videoSources.length) {
+        console.error('All video sources failed');
+        setVideoError(true);
+        return;
+      }
+      
+      const currentSrc = videoSources[currentSourceIndex];
+      console.log(`Trying video source ${currentSourceIndex + 1}:`, currentSrc);
+      video.src = currentSrc;
+      video.load();
+      currentSourceIndex++;
+    };
+    
+    // Start with the first source
+    tryNextSource();
     
     // Add event listeners
     const handleCanPlay = () => {
@@ -58,8 +73,9 @@ export function Hero() {
     };
 
     const handleError = () => {
-      console.error('Video failed to load from:', videoSrc);
-      setVideoError(true);
+      console.error('Video failed to load from:', video.src);
+      // Try next source if available
+      tryNextSource();
     };
     
     video.addEventListener('canplay', handleCanPlay);
