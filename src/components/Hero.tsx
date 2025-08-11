@@ -1,8 +1,10 @@
 import { BookOpen, Users, Calendar } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const handleExploreCourses = () => {
     document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -27,38 +29,73 @@ export function Hero() {
     if (!video) return;
 
     // Set the video source after component mounts
-    const baseUrl = import.meta.env.BASE_URL;
-    const videoSrc = `${baseUrl}videos/tech-background.mp4`;
-    console.log('Setting video source:', videoSrc);
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const videoSrc = baseUrl.endsWith('/') ? 
+      `${baseUrl}videos/tech-background.mp4` : 
+      `${baseUrl}/videos/tech-background.mp4`;
     
-    // Create source element
-    const source = document.createElement('source');
-    source.src = videoSrc;
-    source.type = 'video/mp4';
-    video.appendChild(source);
+    console.log('Base URL:', baseUrl);
+    console.log('Final video source:', videoSrc);
+    
+    // Set the video src directly
+    video.src = videoSrc;
     
     // Load the video
     video.load();
     
-    // Try to play when ready
-    video.addEventListener('canplay', () => {
+    // Add event listeners
+    const handleCanPlay = () => {
+      console.log('Video can play, attempting autoplay');
       video.play().catch(error => {
         console.log('Autoplay failed:', error);
+        setVideoError(true);
       });
-    });
+    };
+
+    const handleLoadedData = () => {
+      console.log('Video loaded successfully');
+      setVideoLoaded(true);
+    };
+
+    const handleError = () => {
+      console.error('Video failed to load from:', videoSrc);
+      setVideoError(true);
+    };
+    
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('error', handleError);
 
     return () => {
       // Cleanup
       if (video) {
-        video.innerHTML = '';
+        video.removeEventListener('canplay', handleCanPlay);
+        video.removeEventListener('loadeddata', handleLoadedData);
+        video.removeEventListener('error', handleError);
       }
     };
   }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
+      {/* Fallback animated background */}
+      {(videoError || !videoLoaded) && (
+        <div className="absolute inset-0 w-full h-full z-0 opacity-20">
+          <div className="w-full h-full bg-gradient-to-br from-blue-900/30 via-black to-blue-800/30 animate-pulse" />
+        </div>
+      )}
+      
+      {/* Debug info - remove in production */}
+      {import.meta.env.DEV && (
+        <div className="absolute top-20 right-4 z-50 bg-black/80 text-white p-4 rounded text-xs">
+          <div>Base URL: {import.meta.env.BASE_URL}</div>
+          <div>Video Loaded: {videoLoaded ? 'Yes' : 'No'}</div>
+          <div>Video Error: {videoError ? 'Yes' : 'No'}</div>
+        </div>
+      )}
+      
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0 opacity-30">
+      <div className={`absolute inset-0 w-full h-full z-0 opacity-30 ${videoError ? 'hidden' : ''}`}>
         <video
           ref={videoRef}
           autoPlay
