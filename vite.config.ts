@@ -7,8 +7,8 @@ export default defineConfig(({ mode }) => {
   
   return {
     plugins: [react()],
-    // Use VERCEL_URL environment variable if available, otherwise use root
-    base: process.env.VERCEL ? '/' : '/',
+    // Set base URL for GitHub Pages
+    base: process.env.NODE_ENV === 'production' ? '/technical-space/' : '/',
     define: {
       // Make environment variables available to the app
       'process.env': env,

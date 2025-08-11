@@ -135,7 +135,7 @@ function EventRegistrationForm({ selectedEvent = '' }: { selectedEvent?: string 
   );
 }
 
-export function ProjectShowcase() {
+export function EventRegistration() {
   const [selectedEvent, setSelectedEvent] = useState('');
   const registrationFormRef = useRef<HTMLDivElement>(null);
   

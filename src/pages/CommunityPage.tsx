@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Header } from '../components/Header';
-import { ProjectShowcase } from './ProjectShowcase';
-import { Contact } from './Contact';
+import { EventRegistration } from './EventRegistration';
+import { Contact } from './ContactPage';
 import { Footer } from '../components/Footer';
 
 export default function Community() {
@@ -18,7 +18,7 @@ export default function Community() {
       <Header isCommunityPage={true} />
       <main className="pt-24">
         <div id="community-content">
-          <ProjectShowcase />
+          <EventRegistration />
         </div>
         <div id="contact" className="pt-16">
           <Contact />

@@ -98,24 +98,6 @@ Before you begin, ensure you have the following installed:
    yarn build
    ```
 
-## Project Structure
-
-```
-src/
-├── assets/           # Static assets (images, fonts, etc.)
-├── components/       # Reusable UI components
-│   ├── common/      # Common UI elements (buttons, inputs, etc.)
-│   ├── layout/      # Layout components (header, footer, etc.)
-│   └── shared/      # Shared components across the application
-├── config/          # Configuration files
-├── pages/           # Page components
-│   ├── Home/        # Home page components
-│   ├── Community/   # Community page components
-│   └── Courses/     # Courses page components
-├── styles/          # Global styles and Tailwind configuration
-└── utils/           # Utility functions and helpers
-```
-
 ## Deployment
 
 This project is configured for deployment on GitHub Pages. Follow these steps to deploy your own version:
@@ -205,54 +187,6 @@ Technical Space was built using these amazing open source projects:
    ```
    http://localhost:5173
    ```
-
-## 🚀 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Lint code with ESLint
-- `npm run deploy` - Deploy to GitHub Pages
-
-## 🚀 Deployment
-
-Deployed using GitHub Pages:
-```bash
-npm run deploy
-```
-
-## 📄 Pages
-
-- **Home**: Engaging hero section with call-to-action
-- **Courses**: Explore our course offerings
-- **Portfolio**: Showcase of projects
-- **Events**: Upcoming and past events
-- **Contact**: Get in touch form
-- **FAQ**: Common questions and answers
-
-## 🛠️ Technologies Used
-
-- **Frontend**: React 18, TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Build Tool**: Vite
-- **Icons**: Lucide React
-- **Analytics**: Vercel Analytics
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Vite](https://vitejs.dev/)
-- Icons by [Lucide](https://lucide.dev/)
-- Animations by [Framer Motion](https://www.framer.com/motion/)
-
 ---
 
 Made with ❤️ by [Ruthwik Reddy]| [Website](https://ruthwikreddy.xyz)

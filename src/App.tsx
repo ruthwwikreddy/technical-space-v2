@@ -1,12 +1,12 @@
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { Courses } from './pages/Courses';
-import { AboutUs } from './pages/AboutUs';
-import { Story } from './pages/Story';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Community from './pages/Community';
+import { Courses } from './pages/CoursesPage';
+import { AboutUs } from './pages/AboutPage';
+import { Story } from './pages/OurStoryPage';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import Community from './pages/CommunityPage';
 import FAQs from './components/FAQs';
-import { Contact } from './pages/Contact';
+import { Contact } from './pages/ContactPage';
 import { Footer } from './components/Footer';
 import Gallery from './components/Gallery';
 import Partners from './components/Partners';
