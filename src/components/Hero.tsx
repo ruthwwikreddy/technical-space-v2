@@ -11,22 +11,31 @@ export function Hero() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
-      {/* Background patterns */}
-      <div className="absolute inset-0 opacity-10">
-        <div 
-          className="absolute inset-0 animate-[pulse_4s_ease-in-out_infinite]" 
-          style={{
-            backgroundImage: 'linear-gradient(rgba(0,51,102,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0,51,102,0.2) 1px, transparent 1px)',
-            backgroundSize: '50px 50px'
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full z-0 opacity-30">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          onEnded={(e) => {
+            // Force restart the video to ensure continuous playback
+            e.currentTarget.currentTime = 0;
+            e.currentTarget.play().catch(error => {
+              console.log('Video play failed:', error);
+            });
           }}
-        />
+          className="w-full h-full object-cover"
+        >
+          <source src="/videos/tech-background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
+      
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50 z-0" />
 
-      {/* Glow effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-800 rounded-full opacity-10 blur-[120px] animate-[pulse_4s_ease-in-out_infinite]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-900 rounded-full opacity-10 blur-[100px] animate-[pulse_4s_ease-in-out_infinite_1s]" />
-
-      <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32">
+      <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32 z-10">
         <div className="text-center space-y-8 animate-fadeIn">
           <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/80 mb-6 leading-tight">
             Empowering Future Innovators<br />
