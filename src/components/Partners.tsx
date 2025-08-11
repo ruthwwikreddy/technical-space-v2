@@ -2,51 +2,52 @@ import { Card } from "./shared/Card";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { X } from 'lucide-react';
+import { getAssetPath } from '../utils/assets';
 
 const partners = [
   { 
     name: 'AI OpenSec',
-    image: './assets/partners/aiopensec.jpg',
+    image: getAssetPath('assets/partners/aiopensec.jpg'),
     website: 'https://aiopensec.com/'
   },
   { 
     name: 'AZ Dev Reskill',
-    image: './assets/partners/azdev.reskilll.svg',
+    image: getAssetPath('assets/partners/azdev.reskilll.svg'),
     website: 'https://azdev.reskilll.com/'
   },
   { 
     name: 'Appy Systems',
-    image: './assets/partners/logo.webp',
+    image: getAssetPath('assets/partners/logo.webp'),
     website: 'https://appysystems.com/'
   },
   { 
     name: 'CK Care Shop',
-    image: './assets/partners/ckccaresshop.avif',
+    image: getAssetPath('assets/partners/ckccaresshop.avif'),
     website: 'https://ckcareshop.com/'
   },
   { 
     name: 'LSA Recruitment',
-    image: './assets/partners/lsa-recruitment.webp',
+    image: getAssetPath('assets/partners/lsa-recruitment.webp'),
     website: 'https://lsarecruit.co.uk/'
   },
   { 
     name: 'Possobuild',
-    image: './assets/partners/possobuild_white.png',
+    image: getAssetPath('assets/partners/possobuild_white.png'),
     website: 'https://possobuild.ai/'
   },
   { 
     name: 'Reskill',
-    image: './assets/partners/reskill_white.png',
+    image: getAssetPath('assets/partners/reskill_white.png'),
     website: 'https://reskilll.com/'
   },
   { 
     name: 'The Youth Talks',
-    image: './assets/partners/youth-talks.png',
+    image: getAssetPath('assets/partners/youth-talks.png'),
     website: 'https://theyouthtalks.com/'
   },
   { 
     name: 'Technical Space',
-    image: './assets/partners/logo.webp',
+    image: getAssetPath('assets/partners/logo.webp'),
     website: '/'
   }
 ];

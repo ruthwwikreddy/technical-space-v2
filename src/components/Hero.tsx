@@ -1,4 +1,5 @@
 import { BookOpen, Users, Calendar } from 'lucide-react';
+import { getAssetPath } from '../utils/assets';
 
 export function Hero() {
   const handleExploreCourses = () => {
@@ -18,6 +19,13 @@ export function Hero() {
           loop
           muted
           playsInline
+          preload="metadata"
+          onCanPlay={(e) => {
+            // Ensure video plays when it can
+            e.currentTarget.play().catch(error => {
+              console.log('Video autoplay failed:', error);
+            });
+          }}
           onEnded={(e) => {
             // Force restart the video to ensure continuous playback
             e.currentTarget.currentTime = 0;
@@ -27,7 +35,7 @@ export function Hero() {
           }}
           className="w-full h-full object-cover"
         >
-          <source src="/videos/tech-background.mp4" type="video/mp4" />
+          <source src={getAssetPath('videos/tech-background.mp4')} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
