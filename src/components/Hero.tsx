@@ -37,7 +37,7 @@ export function Hero() {
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0 opacity-30">
+      <div className="absolute inset-0 w-full h-full z-0 opacity-20">
         <video
           ref={videoRef}
           className="w-full h-full object-cover"
