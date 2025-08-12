@@ -1,6 +1,9 @@
 import { BookOpen, Users, Calendar } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const handleExploreCourses = () => {
     document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -9,16 +12,40 @@ export function Hero() {
     document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // Ensure video plays if autoplay fails
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log('Auto-play was prevented:', error);
+          // Fallback: try to play on user interaction
+          const handleUserInteraction = () => {
+            video.play().catch(console.log);
+            document.removeEventListener('click', handleUserInteraction);
+            document.removeEventListener('touchstart', handleUserInteraction);
+          };
+          
+          document.addEventListener('click', handleUserInteraction);
+          document.addEventListener('touchstart', handleUserInteraction);
+        });
+      }
+    }
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video
+          ref={videoRef}
           className="w-full h-full object-cover"
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
         >
           <source src="/videos/tech-background.mp4" type="video/mp4" />
           {/* Fallback for browsers that don't support video */}
