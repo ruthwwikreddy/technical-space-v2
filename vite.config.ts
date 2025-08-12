@@ -5,8 +5,8 @@ export default defineConfig(({ mode, command }) => {
   // Load env file based on `mode` in the current directory.
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   
-  // Use the base from command line if provided, otherwise default to '/'
-  const base = process.env.VITE_BASE_PATH || '/';
+  // Use the base from command line if provided, otherwise default to '/technical-space/'
+  const base = process.env.VITE_BASE_PATH || '/technical-space/';
   
   return {
     plugins: [react()],

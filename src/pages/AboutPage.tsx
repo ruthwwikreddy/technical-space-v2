@@ -1,5 +1,4 @@
 import { PageContainer } from '../components/shared/PageContainer';
-import { Button } from '../components/shared/Button';
 import { Target, Award, Users2, BookOpen, GraduationCap, Globe2 } from 'lucide-react';
 
 const aboutItems = [
@@ -70,15 +69,6 @@ export function AboutUs() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         {aboutList}
-      </div>
-
-      <div className="text-center">
-        <Button 
-          variant="primary"
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          Get in Touch
-        </Button>
       </div>
     </PageContainer>
   );

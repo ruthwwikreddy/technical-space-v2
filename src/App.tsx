@@ -8,7 +8,6 @@ import Community from './pages/CommunityPage';
 import FAQs from './components/FAQs';
 import { Contact } from './pages/ContactPage';
 import { Footer } from './components/Footer';
-import Gallery from './components/Gallery';
 import Partners from './components/Partners';
 import { SpecialServices } from './components/SpecialServices';
 
@@ -31,9 +30,6 @@ function MainContent() {
         </div>
         <div id="services">
           <SpecialServices />
-        </div>
-        <div id="gallery">
-          <Gallery />
         </div>
         <div id="partners">
           <Partners />
