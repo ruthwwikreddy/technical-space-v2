@@ -9,37 +9,31 @@ export function Hero() {
     document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
-      {/* Animated Tech Background */}
+      {/* Video Background */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <div className="w-full h-full bg-gradient-to-br from-blue-900/20 via-black via-purple-900/10 to-blue-800/20">
-          {/* Animated dots pattern */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0s'}} />
-            <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}} />
-            <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" style={{animationDelay: '2s'}} />
-            <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.5s'}} />
-            <div className="absolute top-2/3 left-1/2 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1.5s'}} />
-            <div className="absolute top-1/2 right-1/5 w-1.5 h-1.5 bg-blue-700 rounded-full animate-pulse" style={{animationDelay: '2.5s'}} />
-          </div>
-          
-          {/* Subtle moving gradient overlay */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-blue-500/10 to-transparent transform -skew-x-12 animate-pulse" />
-          </div>
-        </div>
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/videos/tech-background.mp4" type="video/mp4" />
+          {/* Fallback for browsers that don't support video */}
+          <div className="w-full h-full bg-gradient-to-br from-blue-900/20 via-black via-purple-900/10 to-blue-800/20" />
+        </video>
       </div>
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/40 z-0" />
+      <div className="absolute inset-0 bg-black/30 z-1" />
 
       <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32 z-10">
         <div className="text-center space-y-8 animate-fadeIn">
           <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/80 mb-6 leading-tight">
             Empowering Future Innovators<br />
-            <span className="bg-gradient-to-r from-blue-800 to-blue-900 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">
               Through Real Tech Skills
             </span>
           </h1>
@@ -60,10 +54,9 @@ export function Hero() {
             
             <button 
               onClick={handleJoinCommunity}
-              className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300"
+              className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300 border-2 border-blue-600 hover:border-blue-500"
             >
               <div className="absolute inset-0 bg-white/5 transition-all duration-300 group-hover:bg-white/10" />
-              <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-blue-800 to-blue-700 [mask:linear-gradient(#fff_0_0)_padding-box,linear-gradient(#fff_0_0)] -z-10" />
               <span className="relative text-white font-medium text-lg">Join Our Community</span>
             </button>
           </div>
