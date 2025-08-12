@@ -54,7 +54,7 @@ export function Hero() {
       </div>
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/30 z-1" />
+      <div className="absolute inset-0 bg-black/20 z-1" />
 
       <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32 z-10">
         <div className="text-center space-y-8 animate-fadeIn">
