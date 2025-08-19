@@ -1,4 +1,3 @@
-import React from 'react';
 import { StoryCard } from './StoryCard';
 import { Lightbulb, Target, Rocket } from 'lucide-react';
 

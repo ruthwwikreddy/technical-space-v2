@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { EventRegistration } from './EventRegistration';
 import { Contact } from './ContactPage';
-import { Footer } from '../components/Footer';
 import Gallery from '../components/Gallery';
 
 export default function Community() {
@@ -30,7 +29,6 @@ export default function Community() {
           <Contact />
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

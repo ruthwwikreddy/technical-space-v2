@@ -1,14 +1,15 @@
 import { BookOpen, Users, Calendar } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 
-export function Hero() {
+// Desktop-specific Hero component
+export function HeroDesktop() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleExploreCourses = () => {
     document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleViewServices = () => {
+  const handleServices = () => {
     document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -37,24 +38,24 @@ export function Hero() {
   return (
     <div className="min-h-screen relative overflow-hidden bg-black pt-20">
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0 opacity-20">
+      <div className="absolute inset-0 w-full h-full z-0">
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-30"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
         >
           <source src="/videos/tech-background.mp4" type="video/mp4" />
-          {/* Fallback for browsers that don't support video */}
-          <div className="w-full h-full bg-gradient-to-br from-blue-900/20 via-black via-purple-900/10 to-blue-800/20" />
+          Your browser does not support the video tag.
         </video>
       </div>
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/20 z-1" />
+      <div className="absolute inset-0 bg-black/30 z-1" />
 
       <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32 z-10">
         <div className="text-center space-y-8 animate-fadeIn">
@@ -80,16 +81,11 @@ export function Hero() {
             </button>
             
             <button 
-              onClick={handleViewServices}
-              className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300 bg-gradient-to-r from-purple-800 to-purple-900 hover:from-purple-700 hover:to-purple-800"
+              onClick={handleServices}
+              className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300 border-2 border-blue-600 hover:border-blue-500"
             >
               <div className="absolute inset-0 bg-white/5 transition-all duration-300 group-hover:bg-white/10" />
-              <span className="relative text-white font-medium text-lg flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                View Our Services
-              </span>
+              <span className="relative text-white font-medium text-lg">Services</span>
             </button>
           </div>
         </div>
