@@ -115,34 +115,36 @@ export function ServiceDetailPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
-      <div className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="pt-6">
+        <Header />
+      </div>
+      <div className="pt-8 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text leading-tight">
               {service.title}
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
               {service.description}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mt-4">
             <div className="lg:col-span-2">
-              <div className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-8 border border-gray-800">
+              <div className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-8 border border-gray-800 h-full">
                 <h2 className="text-2xl font-bold mb-6">Service Overview</h2>
-                <p className="text-gray-300 mb-8 leading-relaxed">
+                <p className="text-gray-300 mb-8 leading-relaxed text-lg">
                   {service.details}
                 </p>
                 
-                <h3 className="text-xl font-semibold mb-4">Key Features</h3>
-                <ul className="space-y-3">
+                <h3 className="text-xl font-semibold mb-6 mt-10">Key Features</h3>
+                <ul className="space-y-4">
                   {service.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <svg className="h-6 w-6 text-blue-500 mr-3 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-gray-300 text-lg">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -152,21 +154,21 @@ export function ServiceDetailPage() {
             <div className="lg:col-span-1">
               <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/30 backdrop-blur-lg rounded-2xl p-8 border border-blue-800/30">
                 <h3 className="text-xl font-semibold mb-6">Get Started</h3>
-                <p className="text-gray-300 mb-6">
+                <p className="text-gray-300 mb-8 text-lg">
                   Ready to leverage our {service.title} services? Get in touch with our experts today.
                 </p>
                 <Button 
                   variant="primary" 
-                  className="w-full justify-center"
+                  className="w-full justify-center py-3 text-lg"
                   onClick={() => window.location.href = '/#/contact'}
                 >
                   Contact Us
                 </Button>
               </div>
 
-              <div className="mt-6 bg-gray-900/50 backdrop-blur-lg rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-lg font-semibold mb-4">Other Services</h3>
-                <ul className="space-y-3">
+              <div className="mt-8 bg-gray-900/50 backdrop-blur-lg rounded-2xl p-8 border border-gray-800">
+                <h3 className="text-xl font-semibold mb-6">Other Services</h3>
+                <ul className="space-y-4">
                   {services
                     .filter(s => s.id !== service.id)
                     .slice(0, 3)
@@ -174,9 +176,9 @@ export function ServiceDetailPage() {
                       <li key={s.id}>
                         <a 
                           href={`/services/${s.id}`}
-                          className="text-blue-400 hover:text-blue-300 transition-colors flex items-center"
+                          className="text-blue-400 hover:text-blue-300 transition-colors flex items-center text-lg"
                         >
-                          <span className="mr-2">→</span>
+                          <span className="mr-3">→</span>
                           {s.title}
                         </a>
                       </li>
@@ -184,7 +186,7 @@ export function ServiceDetailPage() {
                 </ul>
                 <a 
                   href="/#services" 
-                  className="inline-block mt-4 text-sm text-gray-400 hover:text-white transition-colors"
+                  className="inline-block mt-6 text-base text-gray-400 hover:text-white transition-colors"
                 >
                   View all services →
                 </a>
