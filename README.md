@@ -89,34 +89,6 @@ To run this project locally, you'll need:
 
 This project is automatically deployed on Vercel. Any push to the `main` branch will trigger a new deployment.
 
-## Contact
-
-For inquiries or support, please contact us at [your-email@example.com](mailto:your-email@example.com)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-   ```
-   http://localhost:5173
-   ```
-
-5. To create a production build:
-   ```bash
-   npm run build
-   ```
-
-## Deployment
-
-This project is configured for deployment on GitHub Pages. Follow these steps to deploy your own version:
-
-1. Fork this repository
-2. Update the `homepage` in `package.json` to `https://<your-username>.github.io/technical-space`
-3. Run the deployment script:
-   ```bash
-   npm run deploy
-   ```
-
 ## Available Scripts
 
 - `npm run dev` - Start development server
@@ -133,10 +105,6 @@ Contributions are welcome and greatly appreciated. To contribute to Technical Sp
 2. Create a new branch for your feature or bugfix
 3. Make your changes and test thoroughly
 4. Submit a pull request with a clear description of your changes
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
