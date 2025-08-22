@@ -75,15 +75,11 @@ Before you begin, ensure you have the following installed:
 2. Install dependencies:
    ```bash
    npm install
-   # or
-   yarn
    ```
 
 3. Start the development server:
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
 4. Open your browser and navigate to:
@@ -94,8 +90,6 @@ Before you begin, ensure you have the following installed:
 5. To create a production build:
    ```bash
    npm run build
-   # or
-   yarn build
    ```
 
 ## Deployment

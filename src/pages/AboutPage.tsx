@@ -37,7 +37,7 @@ const aboutItems = [
 const aboutList = aboutItems.map(({ icon: Icon, title, description }, index) => (
   <div 
     key={title}
-    className="group relative bg-black/40 backdrop-blur-lg rounded-xl p-8 hover:transform hover:-translate-y-2 transition-all duration-500 border border-white/10 overflow-hidden cursor-pointer"
+    className="group relative bg-black/40 backdrop-blur-lg rounded-xl p-6 md:p-8 hover:transform hover:-translate-y-2 transition-all duration-500 border border-white/10 overflow-hidden cursor-pointer w-full max-w-md mx-auto"
     style={{
       animationDelay: `${index * 200}ms`,
       animation: 'fadeInUp 0.5s ease-out forwards'
@@ -45,8 +45,8 @@ const aboutList = aboutItems.map(({ icon: Icon, title, description }, index) => 
   >
     <div className="absolute inset-0 bg-gradient-to-r from-blue-800/20 to-blue-700/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     
-    <div className="relative">
-      <div className="w-16 h-16 mb-6 rounded-xl bg-gradient-to-r from-blue-800 to-blue-700 p-[1px] group-hover:scale-110 transition-transform duration-500">
+    <div className="relative flex flex-col items-center text-center">
+      <div className="w-14 h-14 md:w-16 md:h-16 mb-4 md:mb-6 rounded-xl bg-gradient-to-r from-blue-800 to-blue-700 p-[1px] group-hover:scale-110 transition-transform duration-500">
         <div className="w-full h-full rounded-xl bg-black flex items-center justify-center">
           <Icon className="w-8 h-8 text-white transform group-hover:scale-110 transition-transform duration-500" />
         </div>
@@ -60,14 +60,16 @@ const aboutList = aboutItems.map(({ icon: Icon, title, description }, index) => 
 export function AboutUs() {
   return (
     <PageContainer>
-      <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">About Us</h1>
-        <p className="text-[#CCCCCC] max-w-2xl mx-auto">
-          We are a team of passionate technologists and educators committed to delivering high-quality technical education.
+      <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16 px-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
+          About Us
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl text-gray-300">
+          We are dedicated to providing high-quality technical education that bridges the gap between learning and real-world application.
         </p>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6">
         {aboutList}
       </div>
     </PageContainer>

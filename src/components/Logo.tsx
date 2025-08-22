@@ -7,7 +7,7 @@ export function Logo() {
         
         {/* Technical Space Logo Text */}
         <h1 className="text-2xl font-bold text-white group-hover:text-blue-500 transition-colors duration-300">
-          Technical Space
+          Technical Spaces
         </h1>
       </div>
     </div>

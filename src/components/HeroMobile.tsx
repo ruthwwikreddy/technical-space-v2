@@ -5,12 +5,12 @@ import { useEffect, useRef } from 'react';
 export const HeroMobile = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handleExploreCourses = () => {
-    document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const handleViewServices = () => {
     document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleExploreCourses = () => {
+    document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -60,16 +60,16 @@ export const HeroMobile = () => {
       {/* Gradient overlay for better text contrast */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80 z-1" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-20 md:pb-24 lg:pb-32 z-10 h-full flex flex-col justify-center">
-        <div className="text-center space-y-4 sm:space-y-6 md:space-y-8 animate-fadeIn">
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/80 leading-tight">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-20 md:pb-24 lg:pb-32 z-10 h-full flex flex-col justify-center items-center text-center">
+        <div className="w-full space-y-4 sm:space-y-6 md:space-y-8 animate-fadeIn flex flex-col items-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/80 leading-tight">
             <span className="block">Empowering Future</span>
             <span className="block bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">
               Tech Innovators
             </span>
           </h1>
           
-          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-2 sm:px-4">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
             Master in-demand skills through project-based learning and real-world mentorship
           </p>
 
@@ -99,17 +99,17 @@ export const HeroMobile = () => {
           {[
             { 
               icon: BookOpen, 
-              title: 'Expert-Led Courses', 
-              desc: 'Learn from industry professionals with real-world experience', 
-              target: 'courses',
-              color: 'from-blue-700 to-blue-800'
+              title: 'Our Services', 
+              desc: 'Discover our range of technical solutions', 
+              target: 'services',
+              color: 'from-purple-700 to-purple-800'
             },
             { 
               icon: Users, 
-              title: 'Project-Based Learning', 
-              desc: 'Build real projects that showcase your skills to employers', 
+              title: 'Our Courses', 
+              desc: 'Explore our comprehensive technical programs', 
               target: 'courses',
-              color: 'from-purple-700 to-purple-800'
+              color: 'from-blue-700 to-blue-800'
             },
             { 
               icon: Calendar, 

@@ -1,21 +1,44 @@
 import React from 'react';
+import { NavItem } from '../config/navigation';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface NavigationItemProps {
-  children: React.ReactNode;
-  href: string;
-  isActive?: boolean;
+  item: NavItem;
+  isActive: boolean;
+  onClick?: () => void;
 }
 
-export function NavigationItem({ children, href, isActive = false }: NavigationItemProps) {
+export function NavigationItem({ item, isActive, onClick }: NavigationItemProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const element = document.getElementById(href.replace('#', ''));
-    element?.scrollIntoView({ behavior: 'smooth' });
+    
+    if (onClick) {
+      onClick();
+    }
+
+    if (item.type === 'page') {
+      // Navigate to the page
+      navigate(item.path);
+    } else if (item.type === 'section') {
+      // If we're not on the correct page, navigate there first
+      if (location.pathname !== item.pagePath) {
+        navigate(item.path);
+      } else {
+        // If we're already on the correct page, just scroll to the section
+        const element = document.getElementById(item.sectionId!);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
   };
 
   return (
     <a
-      href={href}
+      href={item.path}
       onClick={handleClick}
       className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group ${
         isActive 
@@ -24,7 +47,7 @@ export function NavigationItem({ children, href, isActive = false }: NavigationI
       }`}
       aria-current={isActive ? 'page' : undefined}
     >
-      {children}
+      {item.label}
       
       {/* Active indicator */}
       {isActive && (

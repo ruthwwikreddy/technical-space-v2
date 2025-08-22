@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { PageContainer } from '../components/shared/PageContainer';
 import { getCourseDetails } from '../components/CourseDetails';
-import { ContactForm } from '../components/ContactForm';
 
 export function CourseDetail() {
   const { courseId } = useParams<{ courseId: string }>();
@@ -130,9 +129,7 @@ export function CourseDetail() {
                   <p className="text-white">Basic computer literacy</p>
                 </div>
                 <button 
-                  onClick={() => {
-                    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={() => window.location.href = 'https://technical-spaces.vercel.app/#/#contact'}
                   className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
                 >
                   Enroll Now
@@ -142,15 +139,21 @@ export function CourseDetail() {
           </div>
         </div>
 
-        {/* Contact Form */}
-        <section className="bg-white/5 rounded-2xl p-8">
-          <h2 className="text-2xl font-bold text-white mb-6">Have Questions About {course.title}?</h2>
-          <div className="space-y-6">
-            <p className="text-gray-300">
-              Interested in learning more about this course? Send us a message and our team will get back to you with more information.
-            </p>
-            <ContactForm />
-          </div>
+        {/* Contact CTA */}
+        <section className="bg-white/5 rounded-2xl p-8 text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Have Questions About {course.title}?</h2>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            Interested in learning more about this course? Contact our team and we'll get back to you with more information.
+          </p>
+          <button 
+            onClick={() => window.location.href = 'https://technical-spaces.vercel.app/#/#contact'}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors inline-flex items-center"
+          >
+            Contact Us
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </button>
         </section>
       </div>
     </PageContainer>
