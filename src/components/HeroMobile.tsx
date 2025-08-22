@@ -10,7 +10,7 @@ export const HeroMobile = () => {
   };
 
   const handleExploreCourses = () => {
-    document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
+    window.location.href = '/#/courses';
   };
 
   useEffect(() => {
@@ -75,22 +75,22 @@ export const HeroMobile = () => {
 
           <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 pt-4 sm:pt-6 md:pt-8">
             <button 
-              onClick={handleExploreCourses}
+              onClick={handleViewServices}
               className="group relative w-full xs:w-auto px-5 py-3.5 sm:px-6 sm:py-4 rounded-full overflow-hidden transition-all duration-300 text-sm sm:text-base"
               aria-label="Explore our courses"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 transition-all duration-300 group-hover:scale-[1.03] group-active:scale-95" />
-              <span className="relative text-white font-medium">Explore Courses</span>
+              <span className="relative text-white font-medium">Explore Services</span>
               <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
             
             <button 
-              onClick={handleViewServices}
+              onClick={handleExploreCourses}
               className="group relative w-full xs:w-auto px-5 py-3.5 sm:px-6 sm:py-4 rounded-full overflow-hidden transition-all duration-300 text-sm sm:text-base border-2 border-blue-600 hover:border-blue-500"
               aria-label="View our services"
             >
               <div className="absolute inset-0 bg-white/5 transition-all duration-300 group-hover:bg-white/10 group-active:bg-white/5" />
-              <span className="relative text-white font-medium text-lg">View Our Services</span>
+              <span className="relative text-white font-medium text-lg">Courses</span>
             </button>
           </div>
         </div>

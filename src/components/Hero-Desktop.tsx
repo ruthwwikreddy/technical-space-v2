@@ -6,7 +6,7 @@ export function HeroDesktop() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleExploreCourses = () => {
-    document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
+    window.location.href = '/#/courses';
   };
 
   const handleViewServices = () => {
@@ -72,20 +72,20 @@ export function HeroDesktop() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
             <button 
-              onClick={handleExploreCourses}
+              onClick={handleViewServices}
               className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-900 transition-all duration-300 group-hover:scale-[1.05]" />
-              <span className="relative text-white font-medium text-lg">Explore Courses</span>
+              <span className="relative text-white font-medium text-lg">Explore Services</span>
               <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
             
             <button 
-              onClick={handleViewServices}
+              onClick={handleExploreCourses}
               className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300 border-2 border-blue-600 hover:border-blue-500"
             >
               <div className="absolute inset-0 bg-white/5 transition-all duration-300 group-hover:bg-white/10" />
-              <span className="relative text-white font-medium text-lg">Services</span>
+              <span className="relative text-white font-medium text-lg">Courses</span>
             </button>
           </div>
         </div>
@@ -113,10 +113,9 @@ export function HeroDesktop() {
               title: 'Tech Events', 
               description: 'Participate in live events and networking', 
               target: 'community',
-              color: 'from-cyan-700 to-cyan-800',
               delay: '300ms'
             }
-          ].map(({ icon: Icon, title, description, target, color, delay }, index) => (
+          ].map(({ icon: Icon, title, description, target, delay }) => (
             <div 
               key={title}
               onClick={() => document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })}

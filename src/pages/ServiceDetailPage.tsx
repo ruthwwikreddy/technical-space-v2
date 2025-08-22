@@ -158,7 +158,7 @@ export function ServiceDetailPage() {
                 <Button 
                   variant="primary" 
                   className="w-full justify-center"
-                  onClick={() => window.location.href = '/https://technical-spaces.vercel.app/#/#contact'}
+                  onClick={() => window.location.href = '/#/contact'}
                 >
                   Contact Us
                 </Button>

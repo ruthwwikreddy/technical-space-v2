@@ -129,7 +129,7 @@ export function CourseDetail() {
                   <p className="text-white">Basic computer literacy</p>
                 </div>
                 <button 
-                  onClick={() => window.location.href = 'https://technical-spaces.vercel.app/#/#contact'}
+                  onClick={() => window.location.href = '/#/contact'}
                   className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
                 >
                   Enroll Now
@@ -146,7 +146,7 @@ export function CourseDetail() {
             Interested in learning more about this course? Contact our team and we'll get back to you with more information.
           </p>
           <button 
-            onClick={() => window.location.href = 'https://technical-spaces.vercel.app/#/#contact'}
+            onClick={() => navigate('/#/contact')}
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors inline-flex items-center"
           >
             Contact Us
