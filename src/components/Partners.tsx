@@ -187,24 +187,7 @@ const Partners = () => {
           </div>
         </div>
       </div>
-      
-      <style jsx>{`
-        /* Smooth scrolling for the container */
-        .smooth-scroll {
-          scroll-behavior: smooth;
-        }
-        
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .hide-scrollbar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-      `}</style>
+
 
       <AnimatePresence>
         {selectedPartner && (
