@@ -22,13 +22,6 @@ export const navItems: NavItem[] = [
     sectionId: 'about'
   },
   { 
-    label: 'Our Story', 
-    path: '/#story', 
-    type: 'section',
-    pagePath: '/',
-    sectionId: 'story'
-  },
-  { 
     label: 'Courses', 
     path: '/courses', 
     type: 'page'
